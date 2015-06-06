@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<head>
+
+<{* Center blocks display order valid values are:  lrc (left right / center) lcr (left center right) clr (center / left right)	*}>
+	<{assign var=theme_top_order value=clr}>
+	<{assign var=theme_bottom_order value=clr}>
+
+	<{assign var=theme_name value=$xoTheme->folderName}>
+
+
+	<title><{if $xoops_pagetitle !=''}><{$xoops_pagetitle}> : <{/if}><{$xoops_sitename}></title>
+	<meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>" />	
+	<meta name="robots" content="<{$xoops_meta_robots}>" />
+	<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+	<meta name="description" content="<{$xoops_meta_description}>" />
+	<meta name="rating" content="<{$xoops_meta_rating}>" />
+	<meta name="author" content="<{$xoops_meta_author}>" />
+	<meta name="copyright" content="<{$xoops_meta_copyright}>" />
+	<meta name="generator" content="XOOPS" />
+	
+
+<{if $isMsie}>
+	<noscript>
+	<meta http-equiv="refresh" content="0; url=<{xoAppUrl . xoops_theme_select=default}>" />
+	</noscript>
+<{/if}>
+
+
+<meta http-equiv="Page-Enter" content="revealtrans(duration=1, transition=23)" /> 
+<meta http-equiv="Page-Exit" content="revealtrans(duration=1, transition=23)" />
+
+
+<link rel="alternate" type="application/rss+xml" title="<{$smarty.const.THEME_RSS}>" href="<{xoAppUrl backend.php}>" />
+
+
+	<link rel="shortcut icon" type="image/ico" href="<{xoImgUrl /favicon.ico}>" />
+	<link rel="icon" type="image/png" href="<{xoImgUrl /icon.png}>" />
+	
+
+	<link rel="stylesheet" type="text/css" media="screen" href="<{xoImgUrl /layout-soup.css}>" />
+	<link rel="stylesheet" type="text/css" media="all" title="Color" href="<{xoImgUrl /style.css}>" />
+
+	<{$xoops_module_header}>
+
+<script type="text/javascript" src="<{xoAppUrl /jseffects/others/textsizer.js}>"></script>
+		
+</head>
+<body id="<{$xoops_dirname}>" class="<{$xoops_langcode}>">
+<{if $xoBlocks.canvas_left and $xoBlocks.canvas_right}><{assign var=columns_layout value='threecolumns-layout'}>
+<{elseif $xoBlocks.canvas_left}><{assign var=columns_layout value='leftcolumn-layout'}>
+<{elseif $xoBlocks.canvas_right}><{assign var=columns_layout value='rightcolumn-layout'}>
+<{/if}>
+<div id="xo-wrapper" class="<{$xoops_dirname}>">
+<div id="xo-bgstatic" class="<{$xoops_dirname}>"></div>
+<div id="xo-canvas"<{if $columns_layout}> class="<{$columns_layout}>"<{/if}>>
+<div id="xo-header" class="<{$xoops_dirname}>">
+
+<div id="xo-banner" class="<{$xoops_dirname}>">
+<div id="xo-site-slogan">"<{$xoops_slogan}>"</div>
+
+		<a id="xo-site-title" href="<{xoAppUrl /}>" title="<{$xoops_sitename}>"><{$xoops_sitename}></a>
+        <{includeq file="$theme_name/userbar.html"}>
+	</div>
+
+
+<{includeq file="$theme_name/globalnav.html"}>
+
+</div>
+			
+	<div id="xo-canvas-content">
+		<{if $xoBlocks.canvas_top}>
+		<{includeq file="$theme_name/blockszone.html" blocks=$xoBlocks.canvas_top
+			zoneClass='' zoneId='xo-canvas-header'
+		}>
+		<{/if}>
+		<table id="xo-canvas-columns" cellspacing="0">
+		<tr>
+			<{if $xoBlocks.canvas_left}>
+			<{includeq file="$theme_name/blockszone.html" blocks=$xoBlocks.canvas_left
+				zoneClass='xo-canvas-column' zoneId='xo-canvas-leftcolumn' zoneTag='td'
+			}>
+			<{/if}>
+           
+			<td id="xo-page">
+				<{if $xoBlocks.page_topleft or $xoBlocks.page_topcenter or $xoBlocks.page_topright}>
+				<div class="xo-blockszone-xo-<{$theme_top_order}>pageblocks" id="xo-page-topblocks">
+					<{includeq file="$theme_name/centerblocks.html" topbottom=top lcr=$theme_top_order|substr:0:1}>
+					<{includeq file="$theme_name/centerblocks.html" topbottom=top lcr=$theme_top_order|substr:1:1}>
+					<{includeq file="$theme_name/centerblocks.html" topbottom=top lcr=$theme_top_order|substr:2:1}>
+				</div>
+				<{/if}>
+				<{if $xoops_contents}><div id="xo-content"><{$xoops_contents}></div><{/if}>
+				<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomcenter or $xoBlocks.page_bottomright}>
+				<div class="xo-blockszone-xo-<{$theme_bottom_order}>pageblocks" id="xo-page-bottomblocks">
+					<{includeq file="$theme_name/centerblocks.html" topbottom=bottom lcr=$theme_bottom_order|substr:0:1}>
+					<{includeq file="$theme_name/centerblocks.html" topbottom=bottom lcr=$theme_bottom_order|substr:1:1}>
+					<{includeq file="$theme_name/centerblocks.html" topbottom=bottom lcr=$theme_bottom_order|substr:2:1}>
+				</div>
+				<{/if}>
+			</td>
+		</tr>
+		</table>
+		<{if $xoBlocks.canvas_bottom}>
+		<{includeq file="$theme_name/blockszone.html" blocks=$xoBlocks.canvas_bottom
+			zoneClass='' zoneId='xo-canvas-footer'
+		}>
+		<{/if}>
+	</div>
+
+	<div id="xo-footer">   
+		<div class="design"><a href="http://vuslat.info/">B.Heyula !</a></div>
+		<div class="rss"><a href="<{xoAppUrl backend.php}>" title="RSS"><img src="<{xoImgUrl icons/action/feed.png}>" alt="RSS" /></a></div>
+
+		<div class="copyright"><{$xoops_footer}></div>
+</div>
+</div>
+
+</div>
+<p>
+<div align="center"></div>
+</body>
+</html>

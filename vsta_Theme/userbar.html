@@ -1,0 +1,28 @@
+		<div id="xo-userbar">
+		<{if !$xoops_isuser}>
+			<!-- menu en mode anonyme -->
+			<form method="post" action="<{xoAppUrl /user.php op=login}>">
+			<input name="uname" type="text" />&nbsp;&nbsp;<input name="pass" type="password" />
+			<input type="hidden" name="xoops_redirect" value="<{$smarty.server.REQUEST_URI}>" />
+			<button type="submit"><img src="<{xoImgUrl icons/users/access2.gif}>" alt="<{$smarty.const._LOGIN}>" /></button>
+			</form>
+			<a href="<{xoAppUrl /register.php}>" class="register">&Uuml;ye Ol!</a>
+		<{else}>
+		<!-- menu en mode enregistré -->
+		Merhaba&nbsp;<a href="<{xoAppUrl /user.php}>" alt="Mon compte" title="Profilinizi gormek icin tiklayiniz."><span id="xo-uname"><{$xoops_uname}></span></a>
+<!--, nous sommes le <{$smarty.now|date_format:"%d %B %Y"}> si vous voulez afficher la date du jour il faut décommenter la ligne -->&nbsp;: 
+<a href="<{xoAppUrl}>"><img src="<{xoImgUrl icons/users/home.gif}>" alt="Accueil" title="Anasayfa" /></a>	
+			<{xoInboxCount assign=pmcount}>
+			<a href="<{xoAppUrl www/viewpmsg.php}>">
+			<!-- pour ma messagerie -->
+			<{if $pmcount}><!-- si j'ai des messages --><img src="<{xoImgUrl icons/users/inbox-full.gif}>" alt="(<{$pmcount}>) Messages" title="<{$pmcount}> mesajiniz var" />
+			<{else}>
+			<!-- si je n'ai pas de message -->
+			<img src="<{xoImgUrl icons/users/inbox.gif}>" alt="Boîte de réception" title="Mesaj kutunuz bos" /><{/if}></a>
+			<!-- fin de ma messagerie -->
+			<a href="<{xoAppUrl /notifications.php}>"><img src="<{xoImgUrl icons/users/note_view.gif}>" alt="Notifications" title="Hatirlatmalariniz" /></a>				
+			<a href="<{xoAppUrl /user.php}>"><img src="<{xoImgUrl icons/users/profile.gif}>" alt="Mon profil" title="Profiliniz" /></a>
+			<a href="<{xoAppUrl /search.php}>"><img src="<{xoImgUrl icons/users/find.gif}>" alt="Rechercher sur le site" title="Arama Yap" /></a>
+			<a href="<{xoAppUrl /user.php op=logout}>"><img src="<{xoImgUrl icons/users/exit.gif}>" alt="Déconnexion" title="Cikis" /></a>
+		<{/if}>
+		</div>
